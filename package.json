@@ -1,0 +1,463 @@
+{
+	"name": "ofs",
+	"displayName": "OFS CM",
+	"description": "OFS CM Language Support",
+	"version": "1.4.3",
+	"icon": "resources/cmIcon.png",
+	"publisher": "OFS",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/docura-io/vscode-cm.git"
+	},
+	"galleryBanner": {
+		"color": "#3487GC",
+		"theme": "light"
+	},
+	"engines": {
+		"vscode": "^1.25.0"
+	},
+	"extensionKind": [
+		"ui",
+		"workspace"
+	],
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:cm",
+		"workspaceContains:**/*.cm",
+		"onStartupFinished",
+		"onCommand:ofs.singleLineBlock"
+	],
+	"main": "./src/extension",
+	"contributes": {
+		"languages": [
+			{
+				"id": "cm",
+				"extensions": [
+					".cm"
+				],
+				"aliases": [
+					"CM"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "cm",
+				"path": "./syntaxes/cm.tmLanguage.json",
+				"scopeName": "source.cm"
+			}
+		],
+		"commands": [
+			{
+				"command": "cm.start",
+				"title": "Start CM",
+				"description": "Starts the CM Compiler.",
+				"category": "CM"
+			},
+			{
+				"command": "cm.cleancm",
+				"title": "Clean CM",
+				"description": "Cleans the CM Compiler.",
+				"category": "CM"
+			},
+			{
+				"command": "cm.stopcm",
+				"title": "Stops CM",
+				"description": "Stops CM Environment.",
+				"category": "CM"
+			},
+			{
+				"command": "cm.runcurrentfile",
+				"title": "Run Current File",
+				"description": "Runs the current file.",
+				"category": "CM"
+			},
+			{
+				"command": "cm.compilefile",
+				"title": "Compile File",
+				"description": "Compiles the current file.",
+				"category": "CM"
+			},
+			{
+				"command": "cm.quitdebug",
+				"title": "Quit Debug",
+				"description": "Ends the debug session.",
+				"category": "CM"
+			},
+			{
+				"command": "cm.startcet",
+				"title": "Start CET Designer",
+				"description": "Starts CET Designer.",
+				"category": "CM"
+			},
+			{
+				"command": "cm.runline",
+				"title": "Run Current Line",
+				"description": "Runs the current line of code",
+				"category": "CM"
+			},
+			{
+				"command": "cm.profileboot",
+				"title": "Profile Boot",
+				"description": "Opens your boot.cm file in your profile",
+				"category": "CM"
+			},
+			{
+				"command": "cm.profiletest",
+				"title": "Profile Test.cm",
+				"description": "Opens your t.cm file in your profile",
+				"category": "CM"
+			},
+			{
+				"command": "cm.loadall",
+				"title": "Load All Known",
+				"description": "Reloads all known packages",
+				"category": "cm"
+			},
+			{
+				"command": "cm.compileallbelow",
+				"title": "Compile VSCode Workspace",
+				"description": "Compiles everything below each open workspace",
+				"category": "CM"
+			},
+			{
+				"command": "cm.compileworkspace",
+				"title": "Compile Specific Workspace",
+				"description": "Compiles everything in a specific workspace",
+				"category": "CM"
+			},
+			{
+				"command": "cm.startwriteoutputfile",
+				"title": "Enable File Logging",
+				"description": "Writes output channel contents into a text file located by default in C:\\temp\\cm_output.txt",
+				"category": "CM"
+			},
+			{
+				"command": "cm.stopwriteoutputfile",
+				"title": "Disable File Logging",
+				"description": "Stops output channel wirting",
+				"category": "CM"
+			},
+			{
+				"command": "cm.userScript",
+				"title": "User Scripts",
+				"description": "Execute User Defined Script",
+				"category": "CM"
+			},
+			{
+				"command": "cm.implements",
+				"title": "Implements",
+				"description": "Goes up to the overriden method",
+				"category": "CM"
+			},
+			{
+				"command": "cm.subclasses",
+				"title": "Sub Classes",
+				"description": "Print all the subclasses of the class under the cursor",
+				"category": "CM"
+			},
+			{
+				"command": "cm.overrides",
+				"title": "Overrides",
+				"description": "Go to the method the current method overrides",
+				"category": "CM"
+			},
+			{
+				"command": "commentSelection",
+				"title": "Comment Selection",
+				"description": "Comments out highlighted text.",
+				"category": "CM"
+			},
+			{
+				"command": "titleComment",
+				"title": "Title Comment",
+				"description": "Makes a Title Comment",
+				"category": "CM"
+			},
+			{
+				"command": "functionComment",
+				"title": "Function Comment",
+				"description": "Makes a Function Comment",
+				"category": "CM"
+			},
+			{
+				"command": "ofsTab",
+				"title": "Convert Emacs Formatting to VSCode Formatting",
+				"description": "Fixes the issue where vscode can only handle one indentation style. Emacs actually uses 2 different styles.",
+				"category": "CM"
+			},
+			{
+				"command": "getGitUsername",
+				"title": "Git Username",
+				"description": "Get the Git username",
+				"category": "CM"
+			},
+			{
+				"command": "date",
+				"title": "Get the date",
+				"description": "Get the date",
+				"category": "CM"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "CM Configuration",
+			"properties": {
+				"cm.root": {
+					"type": "string",
+					"default": "auto",
+					"description": "The path to the CM home"
+				},
+				"cm.newSyntax": {
+					"type": "boolean",
+					"default": true,
+					"description": "If you want to try the new syntax based on C#"
+				},
+				"cm.debugMode": {
+					"type": "boolean",
+					"default": false,
+					"description": "If you want to run the VSCode extension in debug mode"
+				},
+				"cm.outputFilePath": {
+					"type": "string",
+					"default": "C:\\temp\\cm_output.txt",
+					"description": "File that mirrors the content of the output windows for debugging purposes"
+				},
+				"cm.clearOutputBuild": {
+					"type": "boolean",
+					"default": false,
+					"description": "Auto clears the CM Output window each time a build/run is is done."
+				},
+				"cm.rsSaveWatch": {
+					"type": "boolean",
+					"default": true,
+					"description": "Automatically tells CET to reload an RS file on save"
+				},
+				"cm.autoComplete80Enabled": {
+					"type": "boolean",
+					"default": false,
+					"description": "Runs CM 8.0+ autocomplete"
+				},
+				"better-comments.multilineComments": {
+					"type": "boolean",
+					"description": "Whether the multiline comment highlighter should be active",
+					"default": true
+				},
+				"better-comments.highlightPlainText": {
+					"type": "boolean",
+					"description": "Whether the plaintext comment highlighter should be active",
+					"default": false
+				},
+				"better-comments.tags": {
+					"type": "array",
+					"description": "Tags which are used to color the comments. Changes require a restart of VS Code to take effect",
+					"default": [
+						{
+							"tag": "!",
+							"color": "#FF2D00",
+							"strikethrough": false,
+							"underline": false,
+							"backgroundColor": "transparent",
+							"bold": false,
+							"italic": false
+						},
+						{
+							"tag": "?",
+							"color": "#3498DB",
+							"strikethrough": false,
+							"underline": false,
+							"backgroundColor": "transparent",
+							"bold": false,
+							"italic": false
+						},
+						{
+							"tag": "//",
+							"color": "#474747",
+							"strikethrough": true,
+							"underline": false,
+							"backgroundColor": "transparent",
+							"bold": false,
+							"italic": false
+						},
+						{
+							"tag": "***",
+							"color": "#FF2D00",
+							"strikethrough": false,
+							"underline": false,
+							"backgroundColor": "transparent",
+							"bold": false,
+							"italic": false
+						},
+						{
+							"tag": "todo",
+							"color": "#FF8C00",
+							"strikethrough": false,
+							"underline": false,
+							"backgroundColor": "transparent",
+							"bold": false,
+							"italic": false
+						},
+						{
+							"tag": "*",
+							"strikethrough": false,
+							"underline": false,
+							"backgroundColor": "transparent",
+							"bold": false,
+							"italic": false
+						},
+						{
+							"tag": "/**",
+							"strikethrough": false,
+							"underline": false,
+							"backgroundColor": "transparent",
+							"bold": false,
+							"italic": false
+						}
+					]
+				},
+				"ofs.singleLineBlockOnEnter": {
+					"type": "boolean",
+					"default": true,
+					"description": "If enabled, a new commented line is inserted when Enter is pressed, and comment blocks are broken by pressing Shift+Enter. If disabled (the default), a commented line is inserted when Shift+Enter is pressed, and comment blocks are broken by pressing Enter."
+				},
+				"ofs.disabledLanguages": {
+					"type": "array",
+					"default": [],
+					"description": "Add languageIds here to disable any comment completion for that language."
+				},
+				"ofs.slashStyleBlocks": {
+					"type": "array",
+					"default": [],
+					"description": "Add languageIds here to enable '//' and '///'-style single line comment blocks for that language. This allows unsupported languages to have comment completion."
+				},
+				"ofs.hashStyleBlocks": {
+					"type": "array",
+					"default": [],
+					"description": "Add languageIds here to enable '#'-style single line comment blocks for that language. This allows unsupported languages to have comment completion."
+				},
+				"ofs.semicolonStyleBlocks": {
+					"type": "array",
+					"default": [],
+					"description": "Add languageIds here to enable ';'-style single line comment blocks for that language. This allows unsupported languages to have comment completion."
+				}
+			}
+		},
+		"keybindings": [
+			{
+				"command": "cm.cleancm",
+				"key": "shift+f5",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "cm.runcurrentfile",
+				"key": "ctrl+alt+p",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "cm.compilefile",
+				"key": "ctrl+alt+u",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "cm.quitdebug",
+				"key": "ctrl+alt+q",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "cm.runline",
+				"key": "ctrl+alt+space",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "cm.loadall",
+				"key": "ctrl+alt+y",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "commentSelection",
+				"key": "ctrl+alt+c",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "titleComment",
+				"key": "ctrl+alt+j",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "functionComment",
+				"key": "ctrl+alt+k",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "cm.start",
+				"key": "alt+p",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "cm.stopcm",
+				"key": "alt+o",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "ofsTab",
+				"key": "ctrl+alt+f",
+				"when": "editorTextFocus"
+			}
+		],
+		"snippets": [
+			{
+				"language": "cm",
+				"path": "./snippets/cm.json"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"when": "resourceLangId == cm",
+					"command": "cm.compilefile",
+					"group": "1_modification"
+				},
+				{
+					"when": "resourceLangId == cm",
+					"command": "cm.runcurrentfile",
+					"group": "1_modification"
+				}
+			]
+		},
+		"views": {
+			"explorer": [
+				{
+					"id": "cmExplorer",
+					"name": "CM Explorer",
+					"when": "resourceLangId == 'cm'"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "webpack --mode production",
+		"compile": "webpack --mode none",
+		"watch": "webpack --mode none --watch",
+		"test-compile": "tsc -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install"
+	},
+	"devDependencies": {
+		"@types/node": "^12.19.12",
+		"ts-loader": "^5.4.3",
+		"tslint": "^6.1.3",
+		"typescript": "^3.9.7",
+		"vsce": "^2.10.0",
+		"vscode": "^1.1.33",
+		"webpack": "^4.46.0",
+		"webpack-cli": "^4.10.0"
+	},
+	"dependencies": {
+		"clang-format": "^1.0.34",
+		"json5": "^2.2.1",
+		"node-cm": "git+https://github.com/docura-io/node-cm.git",
+		"semantic-release": "^15.13.3"
+	}
+}
